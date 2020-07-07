@@ -108,6 +108,7 @@ hwclock --systohc --utc
 vim /etc/locale.gen # uncomment any locales needed, ie en_GB.UTF-8
 locale-gen
 echo LANG=en_GB.UTF-8 >/etc/locale.conf
+echo a4 > /etc/papersize
 
 # time
 pacman -S --noconfirm ntp
