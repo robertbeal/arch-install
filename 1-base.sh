@@ -67,6 +67,7 @@ pacman -S \
     gnome-terminal \
     linux \
     linux-firmware \
+    lvm2 \
     mesa \
     nano \
     sudo \
