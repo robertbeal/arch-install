@@ -108,7 +108,7 @@ vim /etc/default/grub
 # EFI
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch"
 # BIOS
-grub-install --target=i386-pc
+grub-install --target=i386-pc /dev/sdx
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # users
