@@ -8,7 +8,7 @@ wifi-menu
 
 # create partitions
 cgdisk /dev/sdx
-1 100MB EFI partition # Hex code = ef00
+1 100MB EFI partition # Hex code = ef00 (for EFI install), ef02 (for BIOS install)
 2 100% / partition    # Hex code = 8300
 
 # format the EFI partition
@@ -38,18 +38,27 @@ mkswap /dev/mapper/system-swap
 # mount /
 mount /dev/mapper/system-root /mnt
 swapon /dev/mapper/system-swap
-# mount efi partiition
+# EFI
 mkdir -p /mnt/boot/efi
 mount /dev/sdx1 /mnt/boot/efi
+# BIOS
+mount /dev/sdx1 /mnt/boot
 
 # install base system
 pacstrap /mnt \
     base \
     base-devel \
     bash \
-    efibootmgr \
-    grub-efi-x86_64 \
     intel-ucode
+
+# EFI
+pacstrap /mnt \
+    efibootmgr \
+    grub-efi-x86_64
+
+# BIOS
+pacstrap /mnt \
+    grub-bios
 
 # generate fstab
 genfstab -pU /mnt >>/mnt/etc/fstab
@@ -60,6 +69,12 @@ cp /crypto_keyfile.bin /mnt
 
 # enter the new system
 arch-chroot /mnt /bin/bash
+
+# locale
+vim /etc/locale.gen # uncomment any locales needed, ie en_GB.UTF-8
+locale-gen
+echo LANG=en_GB.UTF-8 >/etc/locale.conf
+echo a4 > /etc/papersize
 
 # install base packages
 pacman -S \
@@ -90,7 +105,10 @@ vim /etc/default/grub
 # GRUB_ENABLE_CRYPTODISK=y
 # GRUB_CMDLINE_LINUX="cryptdevice=/dev/sdx2:cryptroot root=/dev/mapper/system-root"
 # GRUB_CMDLINE_LINUX="cryptdevice=UUID=...:cryptroot root=UUID=..."
+# EFI
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch"
+# BIOS
+grub-install --target=i386-pc
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # users
@@ -104,12 +122,6 @@ echo "arch-linux" >/etc/hostname
 # system clock
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 hwclock --systohc --utc
-
-# locale
-vim /etc/locale.gen # uncomment any locales needed, ie en_GB.UTF-8
-locale-gen
-echo LANG=en_GB.UTF-8 >/etc/locale.conf
-echo a4 > /etc/papersize
 
 # time
 pacman -S --noconfirm ntp
