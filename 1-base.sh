@@ -13,6 +13,8 @@ cgdisk /dev/sdx
 
 # format the EFI partition
 mkfs.vfat -F32 /dev/sdx1
+# format the MBR partition
+mkfs.ext2 /dev/sdx1
 
 # create the encrypted partition on partition 1
 cryptsetup --verify-passphrase luksFormat /dev/sdx2 --type luks1 --cipher aes-xts-plain64 -s 512 -h sha512 --iter-time 100 --key-slot 1
@@ -42,6 +44,7 @@ swapon /dev/mapper/system-swap
 mkdir -p /mnt/boot/efi
 mount /dev/sdx1 /mnt/boot/efi
 # BIOS
+mkdir -p /mnt/boot
 mount /dev/sdx1 /mnt/boot
 
 # install base system
