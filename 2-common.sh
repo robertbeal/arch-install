@@ -36,6 +36,7 @@ sudo pacman -S --noconfirm \
 sudo pacman -S --noconfirm \
     eog \
     evince \
+    gedit \
     gnome-packagekit \
     gnome-calculator \
     gnome-screenshot \
