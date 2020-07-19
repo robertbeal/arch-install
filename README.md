@@ -105,6 +105,7 @@ The guide assumes that `/dev/sda` is the system disk
         base \
         base-devel \
         bash \
+        vim
     # UEFI/GPT
     pacstrap /mnt \
         efibootmgr \
@@ -124,4 +125,146 @@ The guide assumes that `/dev/sda` is the system disk
 
     ```bash
     cp /keyfile.bin /mnt
+    ```
+
+1. Enter the new system
+
+    ```bash
+    arch-chroot /mnt /bin/bash
+    ```
+
+1. Set locale
+
+    ```bash
+    vim /etc/locale.gen # uncomment any locales needed, ie en_GB.UTF-8
+    locale-gen
+    echo LANG=en_GB.UTF-8 >/etc/locale.conf
+    ```
+
+1. Set the default paper size
+
+    ```bash
+    echo a4 > /etc/papersize
+    ```
+
+1. Install base packages
+
+    ```bash
+    pacman -S \
+        dialog \
+        gnome-terminal \
+        linux \
+        linux-firmware \
+        lvm2 \
+        mesa \
+        sudo \
+        wpa_supplicant \
+        xf86-video-fbdev \
+        xorg-server
+    ```
+
+1. mkinitcpio
+
+    ```bash
+    vim /etc/mkinitcpio.conf
+    ## Add 'keyboard keymap' to HOOKS before 'block'
+    ## Add 'encrypt lvm2' to HOOKS before 'filesystems'
+    sed -i 's\^FILES=.*\FILES="/keyfile.bin"\g' /etc/mkinitcpio.conf
+    mkinitcpio -p linux
+    ```
+
+1. grub
+
+    ```bash
+    vim /etc/default/grub
+    # GRUB_HIDDEN_TIMEOUT=5
+    # GRUB_HIDDEN_TIMEOUT_QUIET=true
+    # GRUB_ENABLE_CRYPTODISK=y
+    # GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptroot root=/dev/mapper/system-root"
+    # GRUB_CMDLINE_LINUX="cryptdevice=UUID=...:cryptroot root=UUID=..."
+
+    # UEFI/GPT
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch"
+    # BIOS/MBR
+    grub-install --target=i386-pc /dev/sda
+
+    grub-mkconfig -o /boot/grub/grub.cfg
+    ```
+
+1. Create users
+
+    ```bash
+    useradd --create-home --user-group --group wheel rob
+    passwd rob
+    ```
+
+1. Enable `wheel` group
+
+    ```bash
+    sed -i '/%wheel ALL=(ALL) ALL/s/^#//' /etc/sudoers
+    ```
+
+1. Set hostname
+
+    ```bash
+    echo "robs-machine" >/etc/hostname
+    echo "127.0.1.1 robs-machine.localdomain    robs-machine" >> /etc/hosts
+    ```
+
+1. System clock
+
+    ```bash
+    ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+    hwclock --systohc --utc
+    ```
+
+1. NTP
+
+    ```bash
+    pacman -S --noconfirm ntp
+    systemctl enable ntpd
+    ```
+
+1. Pacman
+
+    ```bash
+    pacman -S --noconfirm pacman-contrib
+    systemctl enable paccache.timer
+    ```
+
+1. Login
+
+    ```bash
+    pacman -S lightdm lightdm-gtk-greeter
+    systemctl enable lightdm
+    ```
+
+1. Desktop
+
+    ```bash
+    pacman -S cinnamon nemo-fileroller nemo-preview
+    ```
+
+1. NetworkManager
+
+    ```bash
+    pacman -S networkmanager gnome-keyring
+    systemctl enable NetworkManager
+    ```
+
+1. Hardening
+
+    ```bash
+    # disable root password
+    passwd -l root
+    # reduce permissions on sensitive files
+    chmod 700 /boot /etc/iptables
+    ```
+
+1. Clean up and reboot
+
+    ```bash
+    exit
+    umount -R /mnt
+    swapoff -a
     ```
