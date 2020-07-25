@@ -1,5 +1,7 @@
 # arch linux installation
 
+The steps I use to get an intial install of Arch Linux. It includes both BIOS/MBR and UEFI/GPT steps as I've got a mixture of old and new hardware.
+
 ## Assumptions
 
 The guide assumes that `/dev/sda` is the system disk
