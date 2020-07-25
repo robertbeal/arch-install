@@ -2,14 +2,16 @@
 
 The steps I use to get an intial install of Arch Linux. It includes both BIOS/MBR and UEFI/GPT steps as I've got a mixture of old and new hardware.
 
-## Assumptions
-
-The guide assumes that `/dev/sda` is the system disk
+It will create an installation with block device device encryption (aside from the boot partition) using LVM on LUKS (via `dm-crypt)`. The boot partition can be better secured using UEFI if you're able to sign the bootloader.
 
 ## Additional Files
 
 - `sshd_config` - a hardened, production grade OpenSSH example config
 - `sysctl.conf` - tweaked kernel settings for better security
+
+## Assumptions
+
+The guide assumes that `/dev/sda` is the system disk
 
 ## Steps
 
@@ -68,7 +70,7 @@ The guide assumes that `/dev/sda` is the system disk
     cryptsetup luksOpen /dev/sda2 cryptroot
     ```
 
-1. Create an encryption key for grub (so the passphrase isn't prompted twice) and put it on slot 0 for added boot speed
+1. Create an encryption key for grub (so the passphrase isn't prompted twice) and put it on slot 0 for added boot speed. Note this does improve convenience at the cost of security as the key becomes a point of weakness
 
     ```bash
     dd if=/dev/urandom of=/keyfile.bin bs=1024 count=4
