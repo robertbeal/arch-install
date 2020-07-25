@@ -6,6 +6,11 @@ The steps I use to get an intial install of Arch Linux. It includes both BIOS/MB
 
 The guide assumes that `/dev/sda` is the system disk
 
+## Additional Files
+
+- `sshd_config` - a hardened, production grade OpenSSH example config
+- `sysctl.conf` - tweaked kernel settings for better security
+
 ## Steps
 
 1. Boot up the arch installer
