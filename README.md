@@ -63,6 +63,22 @@ The guide assumes that `/dev/sda` is the system disk
         mkfs.ext2 /dev/sda1
         ```
 
+1. UEFI/GPT based install
+
+    1. Create the partitions
+
+        ```bash
+        cgdisk /dev/sdx
+        1 100MB EFI partition # Hex code = ef00
+        2 100% / partition        # Hex code = 8300
+        ```
+
+    1. Format the `boot` partition
+
+        ```bash
+        mkfs.vfat -F32 /dev/sda1
+        ```
+
 1. Create the encrypted partition and open it
 
     ```bash
@@ -234,6 +250,23 @@ The guide assumes that `/dev/sda` is the system disk
     systemctl enable ntpd
     ```
 
+1. Hardening
+
+    ```bash
+    # disable root password
+    passwd -l root
+    # reduce permissions on sensitive files
+    chmod 700 /boot /etc/iptables
+    ```
+
+1. Entropy services
+
+    ```bash
+    pacman -S --noconfirm rng-tools haveged
+    systemctl enable haveged
+    systemctl enable rngd
+    ```
+
 1. Pacman
 
     ```bash
@@ -258,16 +291,10 @@ The guide assumes that `/dev/sda` is the system disk
 
     ```bash
     pacman -S networkmanager gnome-keyring
+    pacman -S --noconfirm dnsmasq networkmanager-openvpn network-manager-applet libsecret
+    echo "[main]
+    dns=dnsmasq" | sudo tee /etc/NetworkManager/NetworkManager.conf
     systemctl enable NetworkManager
-    ```
-
-1. Hardening
-
-    ```bash
-    # disable root password
-    passwd -l root
-    # reduce permissions on sensitive files
-    chmod 700 /boot /etc/iptables
     ```
 
 1. Clean up and reboot
@@ -277,3 +304,5 @@ The guide assumes that `/dev/sda` is the system disk
     umount -R /mnt
     swapoff -a
     ```
+
+[Next Steps...](./NEXT.md)

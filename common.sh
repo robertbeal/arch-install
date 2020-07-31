@@ -110,7 +110,7 @@ sudo usermod -aG printadmin "$USER"
 sudo sed -i "/SystemGroup sys root$/c\SystemGroup sys root printadmin" /etc/cups/cups-files.conf
 
 # syncthing
-sudo pacman -S --noconfirm syncthing syncthing-gtk
+sudo pacman -S --noconfirm syncthing
 systemctl enable syncthing --user
 
 # settings
