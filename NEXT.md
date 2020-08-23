@@ -130,6 +130,7 @@ sudo pacman -S --noconfirm \
     sudo systemctl start org.cups.cupsd.service
     sudo groupadd printadmin
     sudo usermod -aG printadmin "$USER"
+    sudo usermod -aG lp "$USER"
     sudo sed -i "/SystemGroup sys root$/c\SystemGroup sys root printadmin" /etc/cups/cups-files.conf
     ```
 
