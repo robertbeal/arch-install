@@ -201,7 +201,7 @@ The guide assumes that `/dev/sda` is the system disk
 
     ```bash
     vim /etc/default/grub
-    # GRUB_HIDDEN_TIMEOUT=5
+    # GRUB_HIDDEN_TIMEOUT=0
     # GRUB_HIDDEN_TIMEOUT_QUIET=true
     # GRUB_ENABLE_CRYPTODISK=y
     # GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptroot root=/dev/mapper/system-root"
