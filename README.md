@@ -184,8 +184,6 @@ The guide assumes that `/dev/sda` is the system disk
         mesa \
         sudo \
         wpa_supplicant \
-        xf86-video-fbdev \
-        xf86-video-vesa \
         xorg-server
     ```
 
