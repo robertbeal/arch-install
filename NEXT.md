@@ -125,7 +125,6 @@ sudo pacman -S --noconfirm \
 
     ```bash
     sudo pacman -S --noconfirm cups cups-pdf system-config-printer gtk3-print-backends ghostscript gsfonts gutenprint
-    sudo pacman -S --noconfirm hplip
     sudo systemctl enable org.cups.cupsd.service
     sudo systemctl start org.cups.cupsd.service
     sudo groupadd printadmin
