@@ -274,6 +274,12 @@ The guide assumes that `/dev/sda` is the system disk
     systemctl enable paccache.timer
     ```
 
+1. Systemd
+
+    ```
+    systemctl enable systemd-homed
+    ```
+
 1. Login
 
     ```bash
