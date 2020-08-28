@@ -84,14 +84,14 @@ Boot up the newly installed arch. The below sets up my typical desktop set up.
 
 1. Office
 
-```bash
-sudo pacman -S --noconfirm \
-    libreoffice-fresh \
-    mythes-en \
-    hyphen-en \
-    hyphen \
-    libmythes
-```
+    ```bash
+    sudo pacman -S --noconfirm \
+        libreoffice-fresh \
+        mythes-en \
+        hyphen-en \
+        hyphen \
+        libmythes
+    ```
 
 1. Android
 
@@ -142,26 +142,26 @@ sudo pacman -S --noconfirm \
 
 1. Gnome Settings
 
-```bash
-gsettings set org.cinnamon.desktop.wm.preferences theme 'Arc Dark'
-gsettings set org.cinnamon.settings-daemon.peripherals.touchpad natural-scroll false
-gsettings set org.cinnamon.settings-daemon.peripherals.touchpad tap-to-click true
-gsettings set org.cinnamon.desktop.wm.preferences num-workspaces 3
-gsettings set org.nemo.preferences default-folder-viewer 'list-view'
-gsettings set org.cinnamon.settings-daemon.plugins.power idle-dim-time 90
-gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-ac-timeout 1800
-gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-timeout 900
-gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-ac 600
-gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-battery 300
-gsettings set org.cinnamon.settings-daemon.plugins.power idle-brightness 10
-gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-type 'suspend'
-gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-ac-type 'suspend'
-gsettings set org.gnome.nm-applet disable-disconnected-notifications true
-gsettings set org.gnome.nm-applet disable-vpn-notifications true
-gsettings set org.gnome.nm-applet disable-connected-notifications true
-gsettings set org.gnome.nm-applet suppress-wireless-networks-available true
-gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
-```
+    ```bash
+    gsettings set org.cinnamon.desktop.wm.preferences theme 'Arc Dark'
+    gsettings set org.cinnamon.settings-daemon.peripherals.touchpad natural-scroll false
+    gsettings set org.cinnamon.settings-daemon.peripherals.touchpad tap-to-click true
+    gsettings set org.cinnamon.desktop.wm.preferences num-workspaces 3
+    gsettings set org.nemo.preferences default-folder-viewer 'list-view'
+    gsettings set org.cinnamon.settings-daemon.plugins.power idle-dim-time 90
+    gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-ac-timeout 1800
+    gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-timeout 900
+    gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-ac 600
+    gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-battery 300
+    gsettings set org.cinnamon.settings-daemon.plugins.power idle-brightness 10
+    gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-type 'suspend'
+    gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-ac-type 'suspend'
+    gsettings set org.gnome.nm-applet disable-disconnected-notifications true
+    gsettings set org.gnome.nm-applet disable-vpn-notifications true
+    gsettings set org.gnome.nm-applet disable-connected-notifications true
+    gsettings set org.gnome.nm-applet suppress-wireless-networks-available true
+    gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
+    ```
 
 1. SSH Permissions
 
