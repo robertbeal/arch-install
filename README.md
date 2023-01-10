@@ -26,7 +26,7 @@ The guide assumes that `/dev/sda` is the system disk
 
     ```bash
     iwctl
-    [iwd]> station device connect SSID
+    [iwd]> station $device connect $ssid
     ```
 
 1. BIOS/MBR based install
