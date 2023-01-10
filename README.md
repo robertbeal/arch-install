@@ -77,7 +77,7 @@ The guide assumes that `/dev/sda` is the system disk
     1. Format the `boot` partition
 
         ```bash
-        mkfs.vfat -F32 /dev/sda1
+        mkfs.fat -F32 /dev/sda1
         ```
 
 1. Create the encrypted partition and open it
