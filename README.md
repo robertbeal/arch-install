@@ -176,6 +176,7 @@ The guide assumes that `/dev/sda` is the system disk
 1. Install base packages
 
     ```bash
+    pacamn-key --init
     pacman -S \
         dialog \
         gnome-terminal \
