@@ -45,7 +45,7 @@ The guide assumes that `/dev/sda` is the system disk
         (fdisk) p
         (fdisk) 1
         (fdisk) <Enter>
-        (fdisk) +256M
+        (fdisk) +500M
         (fdisk) t
         (fdisk) 83
 
@@ -70,8 +70,8 @@ The guide assumes that `/dev/sda` is the system disk
 
         ```bash
         cgdisk /dev/sdx
-        1 100MB EFI partition # Hex code = ef00
-        2 100% / partition        # Hex code = 8300
+        1 500MB EFI partition # Hex code = ef
+        2 100% / partition        # Hex code = 83
         ```
 
     1. Format the `boot` partition
