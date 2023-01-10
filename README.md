@@ -25,7 +25,8 @@ The guide assumes that `/dev/sda` is the system disk
 1. If wifi connection is needed
 
     ```bash
-    wifi-menu
+    iwctl
+    [iwd]# station device connect SSID
     ```
 
 1. BIOS/MBR based install
