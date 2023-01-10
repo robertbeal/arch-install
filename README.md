@@ -131,13 +131,15 @@ The guide assumes that `/dev/sda` is the system disk
     ```bash
     pacstrap /mnt \
         base \
-        base-devel \
+        linux \
+        linux-firmware
         bash \
-        vim
+        vim \
+        iwd \
+        sudo
     # UEFI/GPT
     pacstrap /mnt \
         efibootmgr \
-        grub-efi-x86_64
     # BIOS/MBR
     pacstrap /mnt \
         grub-bios
@@ -182,12 +184,8 @@ The guide assumes that `/dev/sda` is the system disk
     pacman -S \
         dialog \
         gnome-terminal \
-        linux \
-        linux-firmware \
         lvm2 \
         mesa \
-        sudo \
-        wpa_supplicant \
         xorg-server
     ```
 
