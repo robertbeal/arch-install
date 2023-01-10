@@ -56,6 +56,8 @@ The guide assumes that `/dev/sda` is the system disk
         (fdisk) <Enter>
         (fdisk) t
         (fdisk) 83
+        
+        (fdisk) w
         ```
 
     1. Format the `boot` partition
