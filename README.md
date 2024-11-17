@@ -92,9 +92,9 @@ The guide assumes that `/dev/sda` is the system disk
 1. Create an encryption key for grub (so the passphrase isn't prompted twice) and put it on slot 0 for added boot speed. Note this does improve convenience at the cost of security as the key becomes a point of weakness
 
     ```bash
-    dd if=/dev/urandom of=/keyfile.bin bs=1024 count=4
-    chmod 000 /keyfile.bin
-    cryptsetup luksAddKey /dev/sda2 /keyfile.bin --key-slot 0
+    dd if=/dev/urandom of=/root/keyfile.bin bs=1024 count=4
+    chmod 000 /root/keyfile.bin
+    cryptsetup luksAddKey /dev/sda2 /root/keyfile.bin
     ```
 
 1. Create the logical volumes inside the encrypted partition
