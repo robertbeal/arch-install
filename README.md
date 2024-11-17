@@ -85,7 +85,7 @@ The guide assumes that `/dev/sda` is the system disk
 1. Create the encrypted partition and open it
 
     ```bash
-    cryptsetup --verify-passphrase luksFormat /dev/sda2 --type luks1 --cipher aes-xts-plain64 -s 512 -h sha512 --iter-time 500 --key-slot 1
+    cryptsetup --verify-passphrase luksFormat /dev/sda2 --type luks2
     cryptsetup luksOpen /dev/sda2 cryptroot
     ```
 
